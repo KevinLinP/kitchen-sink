@@ -1,34 +1,44 @@
 <template lang="pug">
-  .time-string.text-center {{ timeString }}
+  .container
+    .time-string.text-center {{ timeString }}
 </template>
 
 <script>
   import moment from 'moment';
 
+  var timeString = function() {
+    return moment().format('H:mm');
+  };
+  
   export default {
     data: function() {
       return {
-        now: new Date()
+        timeString: timeString()
       };
     },
-    computed: {
-      timeString: function() {
-        return moment(this.now).format('H:mm');
-      }
+    mounted: function() {
+      let component = this;
+      let offset = moment().add(1, 'm').startOf('minute').diff(moment());
+
+      // NOTE: look into reliability of initial offset
+      setTimeout(function() {
+        component.timeString = timeString();
+
+        setInterval(function ticker() {
+          component.timeString = timeString();
+        }, 60 * 1000);
+      }, offset);
     },
-    methods: {
-      createListItem: function(evt) {
-        evt.preventDefault();
-        Meteor.call('listitems.insert', {
-          text: this.text
-        });
-      }
-    }
   }
 </script>
 
 <style lang="scss" scoped>
+  .container {
+    position: relative;
+  }
   .time-string {
-    font-size: 5rem;
+    font-size: 6rem;
+    position: relative;
+    top: -40px;
   }
 </style>

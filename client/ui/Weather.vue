@@ -18,7 +18,7 @@
 
 <style lang="scss" scoped>
   .current-widget {
-    margin-top: -30px;
+    margin-top: -35px;
     position: relative;
     z-index: 2;
     background: white;
@@ -26,6 +26,8 @@
   }
   .bar-widget {
     margin-top: -210px;
+    overflow: hidden;
+    height: 320px;
     position: relative;
     z-index: 1;
   }

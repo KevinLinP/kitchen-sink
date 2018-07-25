@@ -1,26 +1,9 @@
 <template lang="pug">
   .container
-    .row
-      .col-md-4
+    .row.justify-content-center
+      .col-md-4.d-flex.justify-content-center.align-items-center
         clock
       .col-md-8
         weather
         
 </template>
-
-<script>
-  import { Mongo } from 'meteor/mongo';
-
-  export default {
-    data: function() {
-      return {
-      };
-    },
-    meteor: {
-      $subscribe: {
-      },
-    },
-    methods: {
-    }
-  }
-</script>
