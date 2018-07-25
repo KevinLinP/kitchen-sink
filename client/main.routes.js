@@ -1,8 +1,8 @@
 export default [
   {
     path: '/',
-    name: 'list',
-    component: '/client/ui/TheList.vue'
+    name: 'homeScreen',
+    component: '/client/ui/HomeScreen.vue'
   },
   {
     path: '/login',
