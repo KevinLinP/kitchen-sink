@@ -4,7 +4,7 @@
       .col-md-4
         clock
       .col-md-8
-        iframe(id="forecast_embed" frameborder="0" height="245" width="100%" src="//forecast.io/embed/#lat=47.639469&amp;lon=-122.325989&amp;name=Seattle&amp;units=uk")
+        weather
         
 </template>
 
