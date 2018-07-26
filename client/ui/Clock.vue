@@ -5,15 +5,38 @@
 
 <script>
   import moment from 'moment';
+  import SunCalc from 'suncalc';
+  import _ from 'underscore';
 
-  var timeString = function() {
+  let timeString = function() {
     return moment().format('H:mm');
+  };
+
+  let nextEvent = function() {
+    var data = [];
+    let today = moment();
+
+    _.each([0, 1], function(i, e) {
+      let date = today.add(i, 'd').toDate();
+      let times = SunCalc.getTimes(date, 47.6338217, -122.3215448);
+      // NOTE: this assumes sunrise is always before sunset in a given day 😂
+      data.push({type: 'sunrise', time: times.sunrise});
+      data.push({type: 'sunset', time: times.sunset});
+    });
+
+    let now = new Date();
+    data = _.select(data, function(e, i) {
+      return (e.time > now.getTime());
+    });
+
+    return data;
   };
   
   export default {
     data: function() {
       return {
-        timeString: timeString()
+        timeString: timeString(),
+        nextEvent: nextEvent()
       };
     },
     mounted: function() {
