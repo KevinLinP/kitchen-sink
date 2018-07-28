@@ -18,11 +18,10 @@
 
 <style lang="scss" scoped>
   .current-widget {
-    margin-top: -35px;
     position: relative;
     z-index: 2;
     background: white;
-    height: 220px;
+    height: 230px;
   }
   .bar-widget {
     margin-top: -210px;

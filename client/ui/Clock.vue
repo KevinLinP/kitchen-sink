@@ -7,15 +7,16 @@
 <script>
   import moment from 'moment';
 
-  let timeString = function() {
-    return moment().format('H:mm');
-  };
-
   export default {
     data: function() {
       return {
-        timeString: timeString(),
+        now: moment(),
       };
+    },
+    computed: {
+      timeString: function() {
+        return this.now.format('H:mm');
+      }
     },
     mounted: function() {
       let component = this;
@@ -23,10 +24,10 @@
 
       // NOTE: look into reliability of initial offset
       setTimeout(function() {
-        component.timeString = timeString();
+        component.now = moment();
 
         setInterval(function ticker() {
-          component.timeString = timeString();
+          component.now = moment();
         }, 60 * 1000);
       }, offset);
     },
@@ -41,5 +42,6 @@
     font-size: 6rem;
     position: relative;
     top: -40px;
+    font-weight: 300;
   }
 </style>
