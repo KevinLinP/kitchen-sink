@@ -1,1 +1,1 @@
-import '/imports/api/list-items.js';
+import '/imports/api/bookmarks.js';
