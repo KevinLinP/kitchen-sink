@@ -1,7 +1,8 @@
 <template lang="pug">
-  .container
-    .time-string.text-center {{ timeString }}
-    clock-astro-event
+  .outer-container
+    .inner-container.text-center
+      .time-string {{ timeString }}
+      clock-astro-event
 </template>
 
 <script>
@@ -35,13 +36,14 @@
 </script>
 
 <style lang="scss" scoped>
-  .container {
-    position: relative;
+  .outer-container {
+  }
+  .inner-container {
   }
   .time-string {
     font-size: 6rem;
     position: relative;
-    top: -40px;
     font-weight: 300;
+    line-height: 1.0;
   }
 </style>
