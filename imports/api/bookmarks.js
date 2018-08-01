@@ -13,6 +13,7 @@ Bookmarks.schema = new SimpleSchema({
 });
 Bookmarks.attachSchema(Bookmarks.schema);
 
+// Bookmarks.update({_id: 'pqJ7kP5kPZdScZKpa'}, {$set: {iconUrl: 'https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png'}})
 Meteor.methods({
   'bookmarks.insert'({name, url, iconUrl}) {
     Bookmarks.insert({name, url, iconUrl}, (error, result) => {

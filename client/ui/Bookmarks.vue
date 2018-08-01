@@ -1,10 +1,14 @@
 <template lang="pug">
   div
-    div(v-for='bookmark in bookmarks')
-      a(:href='bookmark.url') {{ bookmark.name }}
+    .row
+      .col-3.d-flex.flex-column(v-for='bookmark in bookmarks')
+        img.img-fluid(:src='bookmark.iconUrl')
+        .text-center.mt-3
+          a(:href='bookmark.url') {{ bookmark.name }}
 </template>
 
 <script>
+//https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png
   import { Bookmarks } from '/imports/api/bookmarks.js';
 
   export default {
