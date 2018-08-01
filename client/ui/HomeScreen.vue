@@ -5,5 +5,9 @@
         clock
       .col-md-8
         weather
-        
+    .row
+      .col-md-4
+        //- currently empty
+      .col-md-8
+        bookmarks
 </template>

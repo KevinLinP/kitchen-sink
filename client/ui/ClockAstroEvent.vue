@@ -19,7 +19,6 @@
     _.each([0, 1], function(i, e) {
       let date = today.add(i, 'd').toDate();
       let times = SunCalc.getTimes(date, 47.6338217, -122.3215448);
-      console.log(times);
       // NOTE: this assumes sunrise is always before sunset in a given day 😂
       data.push({type: 'sunrise', time: moment(times.sunrise)});
       data.push({type: 'sunset', time: moment(times.sunset)});
