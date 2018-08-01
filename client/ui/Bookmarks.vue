@@ -1,10 +1,8 @@
 <template lang="pug">
   div
     .row
-      .col-3.d-flex.flex-column(v-for='bookmark in bookmarks')
-        img.img-fluid(:src='bookmark.iconUrl')
-        .text-center.mt-3
-          a(:href='bookmark.url') {{ bookmark.name }}
+      .col-3(v-for='bookmark in bookmarks')
+        bookmark(:bookmark='bookmark' :key='bookmark.id')
 </template>
 
 <script>
@@ -19,9 +17,6 @@
       bookmarks () {
         return Bookmarks.find({});
       }
-    },
-    data: function() {
-      return {};
     },
   }
 </script>
