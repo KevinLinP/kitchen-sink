@@ -1,8 +1,15 @@
 <template lang="pug">
-  form
-    input.form-control(type='text' v-model='name' placeholder='name')
-    input.form-control(type='text' v-model='url' placeholder='url')
-    input.form-control(type='text' v-model='iconUrl' placeholder='iconUrl')
+  form(@submit='submit')
+    .form-row.mb-2
+      .col
+        input.form-control(type='text' v-model='name' placeholder='name')
+      .col
+        input.form-control(type='text' v-model='url' placeholder='url')
+    .form-row
+      .col
+        input.form-control(type='text' v-model='iconUrl' placeholder='iconUrl')
+      .col-auto
+        input.form-control(type='submit' value='Save')
 </template>
 
 <script>
@@ -15,6 +22,15 @@
         url: 'https://www.reddit.com',
         iconUrl: 'https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png'
       };
+    },
+    methods: {
+      submit: function() {
+        Meteor.call('bookmarks.insert', {
+          name: this.name,
+          url: this.url,
+          iconUrl: this.iconUrl
+        });
+      }
     }
   }
 </script>
