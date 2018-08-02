@@ -1,10 +1,11 @@
 <template lang="pug">
-  div
-    .row.mt-3
-      button.edit-toggle.btn.btn-secondary(@click='toggleIsEditing') toggle edit
+  div.position-relative
+    button.edit-toggle.btn.btn-secondary(@click='toggleIsEditing' :class='{editing: isEditing}')
+      | edit bookmarks
     .row
       .col-3(v-for='bookmark in bookmarks')
         bookmark(:bookmark='bookmark' :key='bookmark.id')
+      .col-3.d-flex.justify-content-center.align-items-center
     .row.mt-3(v-if='isEditing')
       .col
         bookmark-form
@@ -45,8 +46,12 @@
 
 <style lang="scss" scoped>
   .edit-toggle {
+    position: absolute;
+    top: -20px;
+    right: 0;
+
     opacity: 0;
-    &:hover {
+    &:hover, &.editing {
       opacity: 1;
     }
   }
