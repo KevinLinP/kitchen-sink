@@ -21,7 +21,7 @@
     },
     methods: {
       deleteBookmark: function() {
-        console.log(this.bookmark._id);
+        Meteor.call('bookmarks.remove', this.bookmark._id);
       }
     }
   }

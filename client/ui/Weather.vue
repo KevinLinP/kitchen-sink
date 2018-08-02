@@ -5,9 +5,6 @@
 </template>
 
 <script>
-  // import $ from "jquery";
-
-  // NOTE: this code is so bad you should feel bad just for reading it
   export default {
     mounted: function() {
       // $.getScript('https://darksky.net/widget/graph-bar/47.6338217,-122.3215448/uk212/en.js?width=100%&height=400&title=Full Forecast&textColor=333333&bgColor=FFFFFF&transparency=false&skyColor=undefined&fontFamily=Default&customFont=&units=uk2&timeColor=333333&tempColor=333333&currentDetailsOption=false');

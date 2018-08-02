@@ -18,7 +18,10 @@ Meteor.methods({
   'bookmarks.insert'({name, url, iconUrl}) {
     Bookmarks.insert({name, url, iconUrl}, (error, result) => {
     });
-  }
+  },
+  'bookmarks.remove'(id) {
+    Bookmarks.remove(id);
+  },
 });
 
 if (Meteor.isServer) {

@@ -24,7 +24,9 @@
       };
     },
     methods: {
-      submit: function() {
+      submit: function(e) {
+        e.preventDefault();
+
         Meteor.call('bookmarks.insert', {
           name: this.name,
           url: this.url,

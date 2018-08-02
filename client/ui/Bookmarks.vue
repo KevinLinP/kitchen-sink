@@ -1,11 +1,11 @@
 <template lang="pug">
   div
-    .row
-      button(@click='toggleIsEditing') toggle edit
+    .row.mt-3
+      button.edit-toggle.btn.btn-secondary(@click='toggleIsEditing') toggle edit
     .row
       .col-3(v-for='bookmark in bookmarks')
         bookmark(:bookmark='bookmark' :key='bookmark.id')
-    .row
+    .row.mt-3(v-if='isEditing')
       .col
         bookmark-form
 </template>
@@ -44,4 +44,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .edit-toggle {
+    opacity: 0;
+    &:hover {
+      opacity: 1;
+    }
+  }
 </style>
