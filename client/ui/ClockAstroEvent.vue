@@ -14,19 +14,18 @@
 
   let nextEvent = function() {
     var data = [];
-    let today = moment().startOf('day');
+    let now = moment();
 
     _.each([0, 1], function(i, e) {
-      let date = today.add(i, 'd').toDate();
+      let date = moment(now).add(i, 'd').toDate(); // add() mutates original obj.
       let times = SunCalc.getTimes(date, 47.6338217, -122.3215448);
-      // NOTE: this assumes sunrise is always before sunset in a given day 😂
+      // this assumes sunrise is always before sunset in a given day 😂
       data.push({type: 'sunrise', time: moment(times.sunrise)});
       data.push({type: 'sunset', time: moment(times.sunset)});
     });
 
-    let now = moment();
     data = _.select(data, function(e, i) {
-      return (e.time.isAfter(now));
+      return e.time.isAfter(now);
     });
 
     return data[0];
@@ -41,6 +40,7 @@
     },
     mounted: function() {
       let component = this;
+
       setInterval(function ticker() {
         component.now = moment();
       }, 60 * 1000);

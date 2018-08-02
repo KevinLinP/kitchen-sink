@@ -23,7 +23,7 @@
       let component = this;
       let offset = moment().add(1, 'm').startOf('minute').diff(moment());
 
-      // NOTE: look into reliability of initial offset
+      // look into reliability of initial offset
       setTimeout(function() {
         component.now = moment();
 
