@@ -7,7 +7,7 @@
         weather
     .row
       .col-md-4
-        //- currently empty
+        upcoming-events
       .col-md-8
         bookmarks
 </template>

@@ -5,6 +5,8 @@
         input.form-control(type='text' v-model='name' placeholder='name')
       .col
         input.form-control(type='text' v-model='eventAt' placeholder='eventAt')
+      .col
+        input.btn.btn-secondary(type='submit' value='Save')
 </template>
 
 <script>
@@ -23,7 +25,7 @@
 
         Meteor.call('upcomingEvents.insert', {
           name: this.name,
-          url: this.eventAt,
+          eventAt: this.eventAt,
         });
       }
     }

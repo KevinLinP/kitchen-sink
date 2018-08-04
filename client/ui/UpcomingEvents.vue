@@ -1,7 +1,8 @@
 <template lang="pug">
   div
     ul(v-for='upcomingEvent in upcomingEvents')
-      li {{upcomingEvent.name }}
+      li {{upcomingEvent.name}} {{upcomingEvent.eventAt}}
+    upcoming-event-form
 </template>
 
 <script>
