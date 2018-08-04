@@ -1,0 +1,43 @@
+<template lang="pug">
+  .d-flex.justify-content-between
+    .name {{name}}
+    div
+      span.days {{eventInDays}}
+      |
+      | days
+    button.btn.btn-secondary.delete-button(v-if='isEditing' @click='deleteUpcomingEvent')
+      | delete
+</template>
+
+<script>
+  import moment from 'moment';
+  import { Session } from 'meteor/session'
+
+  export default {
+    props: ['_id', 'name', 'eventAt'],
+    meteor: {
+      isEditing () {
+        return Session.get('isEditingHomescreen');
+      }
+    },
+    computed: {
+      eventInDays: function() {
+        return moment(this.eventAt).diff(moment(), 'd') + 1;
+      }
+    },
+    methods: {
+      deleteUpcomingEvent: function() {
+        Meteor.call('upcomingEvents.remove', this._id);
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .name {
+    font-weight: 500;
+  }
+  .days {
+    font-weight: 600;
+  }
+</style>

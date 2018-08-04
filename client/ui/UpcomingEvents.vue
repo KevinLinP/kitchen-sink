@@ -1,8 +1,9 @@
 <template lang="pug">
   div
-    ul(v-for='upcomingEvent in upcomingEvents')
-      li {{upcomingEvent.name}} {{upcomingEvent.eventAt}}
-    upcoming-event-form
+    ul.list-unstyled(v-for='upcomingEvent in upcomingEvents')
+      li
+        upcoming-event(v-bind='upcomingEvent')
+    upcoming-event-form(v-if='isEditing')
 </template>
 
 <script>
@@ -10,11 +11,6 @@
   import { Session } from 'meteor/session'
 
   export default {
-    data: function() {
-      return {
-        isEditingSessionVar: 'upcomingEventsIsEditing'
-      };
-    },
     meteor: {
       $subscribe: {
         'upcomingEvents': []
@@ -23,18 +19,9 @@
         return UpcomingEvents.find({});
       },
       isEditing () {
-        return Session.get(this.isEditingSessionVar);
+        return Session.get('isEditingHomescreen');
       }
     },
-    mounted: function() {
-      Session.setDefault(this.isEditingSessionVar, true); // TODO: set to false
-    },
-    methods: {
-      toggleIsEditing: function() {
-        let prevValue = Session.get(this.isEditingSessionVar);
-        Session.set(this.isEditingSessionVar, !prevValue);
-      }
-    }
   }
 </script>
 

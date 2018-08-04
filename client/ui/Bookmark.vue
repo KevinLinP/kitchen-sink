@@ -16,7 +16,7 @@
     props: ['bookmark'],
     meteor: {
       isEditing: function() {
-        return Session.get('bookmarksIsEditing');
+        return Session.get('isEditingHomescreen');
       }
     },
     methods: {

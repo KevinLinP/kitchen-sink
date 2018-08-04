@@ -15,8 +15,8 @@
   export default {
     data: function() {
       return {
-        name: 'Reddit',
-        eventAt: 'August 23',
+        name: '',
+        eventAt: '',
       };
     },
     methods: {

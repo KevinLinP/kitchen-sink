@@ -1,7 +1,5 @@
 <template lang="pug">
   div.position-relative
-    button.edit-toggle.btn.btn-secondary(@click='toggleIsEditing' :class='{editing: isEditing}')
-      | edit bookmarks
     .row
       .col-3(v-for='bookmark in bookmarks')
         bookmark(:bookmark='bookmark' :key='bookmark.id')
@@ -16,11 +14,6 @@
   import { Session } from 'meteor/session'
 
   export default {
-    data: function() {
-      return {
-        isEditingSessionVar: 'bookmarksIsEditing'
-      };
-    },
     meteor: {
       $subscribe: {
         'bookmarks': []
@@ -29,18 +22,9 @@
         return Bookmarks.find({});
       },
       isEditing () {
-        return Session.get(this.isEditingSessionVar);
+        return Session.get('isEditingHomescreen');
       }
     },
-    mounted: function() {
-      Session.setDefault(this.isEditingSessionVar, false);
-    },
-    methods: {
-      toggleIsEditing: function() {
-        let prevValue = Session.get(this.isEditingSessionVar);
-        Session.set(this.isEditingSessionVar, !prevValue);
-      }
-    }
   }
 </script>
 
