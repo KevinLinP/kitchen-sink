@@ -5,8 +5,8 @@
         input.form-control(type='text' v-model='name' placeholder='name')
       .col
         input.form-control(type='text' v-model='eventAt' placeholder='eventAt')
-      .col
-        input.btn.btn-secondary(type='submit' value='Save')
+      .col-auto
+        input.form-control(type='submit' value='Save')
 </template>
 
 <script>

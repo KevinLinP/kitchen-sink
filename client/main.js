@@ -23,5 +23,7 @@ Meteor.startup(() => {
     ...AppLayout,
   }).$mount('app');
 
-  //navigator.serviceWorker.register('/sw.js').then().catch(error => console.log('ServiceWorker registration failed: ', err));
+  if (Meteor.isProduction) {
+    navigator.serviceWorker.register('/sw.js').then().catch(error => console.log('ServiceWorker registration failed: ', err));
+  }
 });

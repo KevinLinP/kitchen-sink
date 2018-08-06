@@ -38,6 +38,7 @@
     font-weight: 500;
   }
   .days {
-    font-weight: 600;
+    font-size: 110%;
+    font-weight: 500;
   }
 </style>
