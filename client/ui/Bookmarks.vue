@@ -1,9 +1,8 @@
 <template lang="pug">
   div.position-relative
-    .row
+    draggable(v-model='bookmarks' class='row' :move='isEditingFunc')
       .col-3(v-for='bookmark in bookmarks')
         bookmark(:bookmark='bookmark' :key='bookmark.id')
-      .col-3.d-flex.justify-content-center.align-items-center
     .row.mt-3(v-if='isEditing')
       .col
         bookmark-form
@@ -11,9 +10,13 @@
 
 <script>
   import { Bookmarks } from '/imports/api/bookmarks.js';
-  import { Session } from 'meteor/session'
+  import { Session } from 'meteor/session';
+  import draggable from 'vuedraggable';
 
   export default {
+    components: {
+      draggable
+    },
     meteor: {
       $subscribe: {
         'bookmarks': []
@@ -25,6 +28,12 @@
         return Session.get('isEditingHomescreen');
       }
     },
+    methods: {
+      // TODO: think of a better style
+      isEditingFunc: function() {
+        return this.isEditing;
+      }
+    }
   }
 </script>
 
