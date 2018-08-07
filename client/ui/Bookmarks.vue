@@ -1,6 +1,6 @@
 <template lang="pug">
   div.position-relative
-    draggable(v-model='bookmarks' class='row' :move='isEditingFunc')
+    draggable(v-model='bookmarks' class='row' :move='isEditingFunc' @update='sortableUpdate')
       .col-3(v-for='bookmark in bookmarks')
         bookmark(:bookmark='bookmark' :key='bookmark.id')
     .row.mt-3(v-if='isEditing')
@@ -11,6 +11,7 @@
 <script>
   import { Bookmarks } from '/imports/api/bookmarks.js';
   import { Session } from 'meteor/session';
+  import _ from 'underscore';
   import draggable from 'vuedraggable';
 
   export default {
@@ -22,7 +23,7 @@
         'bookmarks': []
       },
       bookmarks () {
-        return Bookmarks.find({});
+        return Bookmarks.find({}, {sort: {position: 1}});
       },
       isEditing () {
         return Session.get('isEditingHomescreen');
@@ -32,6 +33,11 @@
       // TODO: think of a better style
       isEditingFunc: function() {
         return this.isEditing;
+      },
+      sortableUpdate: function(e) {
+        _.each(this.bookmarks, function(bookmark, i) {
+          Meteor.call('bookmarks.update', bookmark._id, {position: i});
+        });
       }
     }
   }
