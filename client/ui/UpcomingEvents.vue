@@ -1,7 +1,7 @@
 <template lang="pug">
   div
-    ul.list-unstyled(v-for='upcomingEvent in upcomingEvents')
-      li
+    ul.list-unstyled
+      li.mb-1(v-for='upcomingEvent in upcomingEvents')
         upcoming-event(v-bind='upcomingEvent')
     upcoming-event-form(v-if='isEditing')
 </template>
@@ -16,7 +16,7 @@
         'upcomingEvents': []
       },
       upcomingEvents() {
-        return UpcomingEvents.find({});
+        return UpcomingEvents.find({}, {sort: {eventAt: 1}});
       },
       isEditing () {
         return Session.get('isEditingHomescreen');
