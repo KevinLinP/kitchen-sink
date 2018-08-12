@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import { DefaultAllows } from './default-allows';
 
 export const UpcomingEvents = new Mongo.Collection('upcomingEvents');
 
@@ -11,18 +12,12 @@ UpcomingEvents.schema = new SimpleSchema({
   }}
 });
 UpcomingEvents.attachSchema(UpcomingEvents.schema);
-
-Meteor.methods({
-  'upcomingEvents.insert'({name, eventAt}) {
-    UpcomingEvents.insert({name, eventAt});
-  },
-  'upcomingEvents.remove'(id) {
-    UpcomingEvents.remove(id);
-  },
-});
+UpcomingEvents.allow(DefaultAllows);
 
 if (Meteor.isServer) {
   Meteor.publish('upcomingEvents', function () {
-    return UpcomingEvents.find({});
+    if (this.userId) {
+      return UpcomingEvents.find({});
+    }
   });
 }

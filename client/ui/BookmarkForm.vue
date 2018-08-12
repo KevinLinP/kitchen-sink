@@ -1,5 +1,5 @@
 <template lang="pug">
-  form(@submit='submit')
+  form(@submit.prevent='submit')
     .form-row.mb-2
       .col
         input.form-control(type='text' v-model='name' placeholder='name')
@@ -25,9 +25,7 @@
     },
     methods: {
       submit: function(e) {
-        e.preventDefault();
-
-        Meteor.call('bookmarks.insert', {
+        Bookmarks.insert({
           name: this.name,
           url: this.url,
           iconUrl: this.iconUrl

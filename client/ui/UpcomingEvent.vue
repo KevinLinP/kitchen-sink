@@ -11,7 +11,8 @@
 
 <script>
   import moment from 'moment';
-  import { Session } from 'meteor/session'
+  import { Session } from 'meteor/session';
+  import { UpcomingEvents } from '/imports/api/upcoming-events.js';
 
   export default {
     props: ['_id', 'name', 'eventAt'],
@@ -27,7 +28,7 @@
     },
     methods: {
       deleteUpcomingEvent: function() {
-        Meteor.call('upcomingEvents.remove', this._id);
+        UpcomingEvents.remove(id);
       }
     }
   }

@@ -11,6 +11,7 @@
 
 <script>
   import { Session } from 'meteor/session';
+  import { Bookmarks } from '/imports/api/bookmarks';
 
   export default {
     props: ['bookmark'],
@@ -21,7 +22,7 @@
     },
     methods: {
       deleteBookmark: function() {
-        Meteor.call('bookmarks.remove', this.bookmark._id);
+        Bookmarks.remove(this.bookmark._id);
       }
     }
   }

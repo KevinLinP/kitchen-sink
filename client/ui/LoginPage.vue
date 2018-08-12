@@ -6,11 +6,11 @@ div
 
   div(v-else)
     .h3.mb-3 Login
-    form(@submit='login')
-      input(type='text' v-model='email' readonly=true)
-      input(type='password' v-model='password' placeholder='password')
+    form.form-inline(@submit='login')
+      input.form-control.mr-2(type='text' v-model='email' readonly=true)
+      input.form-control.mr-2(type='password' v-model='password' placeholder='password')
 
-      input(type="submit" class="btn btn-primary" value="login")
+      button(type="submit" class="btn btn-primary") Login
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template lang="pug">
-  form(@submit='submit')
+  form(@submit.prevent='submit')
     .form-row.mb-2
       .col
         input.form-control(type='text' v-model='name' placeholder='name')
@@ -21,9 +21,7 @@
     },
     methods: {
       submit: function(e) {
-        e.preventDefault();
-
-        Meteor.call('upcomingEvents.insert', {
+        UpcomingEvents.insert({
           name: this.name,
           eventAt: this.eventAt,
         });

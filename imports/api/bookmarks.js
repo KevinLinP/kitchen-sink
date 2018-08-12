@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import { DefaultAllows } from './default-allows';
 
 export const Bookmarks = new Mongo.Collection('bookmarks');
 
@@ -13,23 +14,12 @@ Bookmarks.schema = new SimpleSchema({
   }}
 });
 Bookmarks.attachSchema(Bookmarks.schema);
-
-// Bookmarks.update({_id: 'pqJ7kP5kPZdScZKpa'}, {$set: {iconUrl: 'https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png'}})
-Meteor.methods({
-  'bookmarks.insert'({name, url, iconUrl}) {
-    Bookmarks.insert({name, url, iconUrl}, (error, result) => {
-    });
-  },
-  'bookmarks.update'(_id, fields) {
-    Bookmarks.update(_id, {$set: fields});
-  },
-  'bookmarks.remove'(id) {
-    Bookmarks.remove(id);
-  },
-});
+Bookmarks.allow(DefaultAllows);
 
 if (Meteor.isServer) {
   Meteor.publish('bookmarks', function () {
-    return Bookmarks.find({});
+    if (this.userId) {
+      return Bookmarks.find({});
+    }
   });
 }
