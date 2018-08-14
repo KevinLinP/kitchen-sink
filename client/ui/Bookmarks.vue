@@ -36,7 +36,7 @@
       },
       sortableUpdate: function(e) {
         _.each(this.bookmarks, function(bookmark, i) {
-          Meteor.call('bookmarks.update', bookmark._id, {position: i});
+          Bookmarks.update(bookmark._id, {$set: {position: i}});
         });
       }
     }

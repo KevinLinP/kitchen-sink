@@ -5,6 +5,11 @@ export default [
     component: '/client/ui/HomeScreen.vue'
   },
   {
+    path: '/',
+    name: 'trackingNumbersPage',
+    component: '/client/ui/TrackingNumbersPage.vue'
+  },
+  {
     path: '/login',
     name: 'loginPage',
     component: '/client/ui/LoginPage.vue'
