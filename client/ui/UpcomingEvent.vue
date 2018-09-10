@@ -28,7 +28,7 @@
     },
     methods: {
       deleteUpcomingEvent: function() {
-        UpcomingEvents.remove(id);
+        UpcomingEvents.remove(this._id);
       }
     }
   }
