@@ -6,18 +6,23 @@ import VueMeteorTracker from 'vue-meteor-tracker';
 import '/imports/startup/both';
 import AppLayout from '/client/ui/AppLayout.vue';
 import HomeScreen from '/client/ui/HomeScreen.vue';
+import LoginPage from '/client/ui/LoginPage.vue';
+import NotFound from '/client/ui/NotFound.vue';
 
-const routes = [
-  {path: '/', component: HomeScreen}
-];
-const router = new VueRouter({routes});
+Vue.use(VueRouter);
+Vue.use(VueMeteorTracker);
+
+const router = new VueRouter({
+  mode: 'history',
+  routes: [
+    {path: '/login', component: LoginPage},
+    {path: '', component: HomeScreen},
+    {path: '*', component: NotFound}
+  ]
+});
 
 // App start
 Meteor.startup(() => {
-
-  Vue.use(VueMeteorTracker);
-  Vue.use(VueRouter);
-
   new Vue({
     router,
     ...AppLayout,
