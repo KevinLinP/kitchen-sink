@@ -25,11 +25,30 @@
     },
     mounted: function() {
       Session.setDefault('isEditingHomescreen', false);
+      this.printLocation();
     },
     methods: {
       toggleIsEditing: function() {
         let prevValue = Session.get('isEditingHomescreen');
         Session.set('isEditingHomescreen', !prevValue);
+      },
+      printLocation() {
+        if (!('geolocation' in navigator)) {
+          return;
+        }
+
+        const successFunc = (position) => {
+          console.log(position.coords.latitude, position.coords.longitude);
+          console.log(position);
+        };
+        const failureFunc = (error) => {
+          console.log(`geolocate error ${error.code}: ${error.message}`);
+        };
+        const watchOptions = {
+          enableHighAccuracy: true
+        };
+
+        const watchId = navigator.geolocation.watchPosition(successFunc, failureFunc, watchOptions);
       }
     }
   }
