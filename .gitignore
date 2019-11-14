@@ -1,2 +1,3 @@
 .deploy
+.cache/
 node_modules/
