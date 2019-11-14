@@ -12,13 +12,13 @@
   import SunCalc from 'suncalc';
   import _ from 'underscore';
 
-  let nextEvent = function() {
+  let nextEvent = function(location) {
     var data = [];
     let now = moment();
 
     _.each([0, 1], function(i, e) {
       let date = moment(now).add(i, 'd').toDate(); // add() mutates original obj.
-      let times = SunCalc.getTimes(date, 47.6338217, -122.3215448);
+      let times = SunCalc.getTimes(date, location.lat, location.long);
       // this assumes sunrise is always before sunset in a given day 😂
       data.push({type: 'sunrise', time: moment(times.sunrise)});
       data.push({type: 'sunset', time: moment(times.sunset)});
@@ -31,10 +31,16 @@
     return data[0];
   };
 
+  let location = {
+    name: 'Washington, DC',
+    lat: 38.9047,
+    long: -77.0315,
+  };
+
   export default {
     data: function() {
       return {
-        nextEvent: nextEvent(),
+        nextEvent: nextEvent(location),
         now: moment()
       };
     },
