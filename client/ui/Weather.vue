@@ -1,13 +1,23 @@
 <template lang="pug">
   div
-    iframe.current-widget(id="forecast_embed" frameborder="0" height="245" width="100%" src="//forecast.io/embed/#lat=47.639469&lon=-122.325989&name=Eastlake,%20Seattle&units=uk")
-    //- #customize-script-container.bar-widget
+    iframe.current-widget(id='forecast_embed' frameborder='0' height='245' width='100%' :src='iframeUrl')
 </template>
 
 <script>
   export default {
-    mounted: function() {
-      // $.getScript('https://darksky.net/widget/graph-bar/47.6338217,-122.3215448/uk212/en.js?width=100%&height=400&title=Full Forecast&textColor=333333&bgColor=FFFFFF&transparency=false&skyColor=undefined&fontFamily=Default&customFont=&units=uk2&timeColor=333333&tempColor=333333&currentDetailsOption=false');
+    data() {
+      return {
+        location: {
+          name: 'Washington, DC',
+          lat: 38.9047,
+          long: -77.0315,
+        }
+      };
+    },
+    computed: {
+      iframeUrl() {
+        return `//forecast.io/embed/#name=${this.location.name}&lat=${this.location.lat}&lon=${this.location.long}&units=uk`;
+      }
     }
   }
 </script>
