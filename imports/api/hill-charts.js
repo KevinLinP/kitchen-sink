@@ -14,13 +14,7 @@ HillCharts.attachSchema(HillCharts.schema);
 HillCharts.allow(DefaultAllows);
 
 if (Meteor.isServer) {
-  Meteor.publish('hill-charts', function () {
-    if (this.userId) {
-      return HillChartItems.find();
-    }
-  });
-
-  Meteor.publish('hill-chart', function (id) {
-    return HillChartItems.find(id);
+  Meteor.publish('hillChart', function (id) {
+    return HillCharts.find(id);
   });
 }

@@ -6,6 +6,7 @@ import VueMeteorTracker from 'vue-meteor-tracker';
 import '/imports/startup/both';
 import AppLayout from '/client/ui/AppLayout.vue';
 import HomeScreen from '/client/ui/HomeScreen.vue';
+import HillChartPage from '/client/ui/HillChartPage.vue';
 import LoginPage from '/client/ui/LoginPage.vue';
 import NotFound from '/client/ui/NotFound.vue';
 
@@ -17,7 +18,8 @@ const router = new VueRouter({
   routes: [
     {path: '/login', component: LoginPage},
     {path: '', component: HomeScreen},
-    {path: '*', component: NotFound}
+    {path: '*', component: NotFound},
+    {path: '/hill-charts/:id', component: HillChartPage},
   ]
 });
 
