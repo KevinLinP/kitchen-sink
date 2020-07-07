@@ -10,7 +10,7 @@
     "install": "^0.12.1",
     "meteor-node-stubs": "^0.4.1",
     "moment": "^2.22.2",
-    "npm": "^6.13.0",
+    "npm": "^6.14.6",
     "simpl-schema": "^1.5.3",
     "suncalc": "^1.8.0",
     "underscore": "^1.9.1",
