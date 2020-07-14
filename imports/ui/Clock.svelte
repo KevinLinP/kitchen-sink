@@ -7,6 +7,6 @@
 </script>
  
  
-<h1 class="display-1">
+<h1 class="display-1 my-0" style="line-height: 1;">
   { timeString }
 </h1>

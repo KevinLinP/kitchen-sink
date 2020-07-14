@@ -5,13 +5,8 @@
   import { onMount } from 'svelte';
 
   export let now
+  export let location
 
-  // TODO: made non-static
-  const location = {
-    name: 'Washington, DC',
-    lat: 38.9047,
-    long: -77.0315,
-  };
   let nextEvent = null
   let nextEventTimeString = null
   let nextEventOffsetString = null
