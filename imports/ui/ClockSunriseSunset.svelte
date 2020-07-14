@@ -2,6 +2,7 @@
   import _ from 'underscore'
   import moment from 'moment'
   import SunCalc from 'suncalc'
+  import { onMount } from 'svelte';
 
   // TODO: made non-static
   const location = {
@@ -9,40 +10,76 @@
     lat: 38.9047,
     long: -77.0315,
   };
+
+  let now = moment()
   let nextEvent = null
-  let intervalId
+  let nextEventTimeString = null
+  let nextEventOffsetString = null
 
   function setNextEvent() {
-    let now = moment()
     let nextEvents = []
 
     for (let i = 0; i <= 1; i++) {
       let date = now.clone().add(i, 'd').toDate()
       let times = SunCalc.getTimes(date, location.lat, location.long)
 
-      nextEvents.push({type: 'sunrise', time: moment(times.sunrise)})
-      nextEvents.push({type: 'sunset', time: moment(times.sunset)})
+      nextEvents.push({type: 'sunrise', time: times.sunrise})
+      nextEvents.push({type: 'sunset', time: times.sunset})
     }
 
     nextEvent = _.find(nextEvents, (event) => {
-      return event.time.isAfter(now)
+      return moment(event.time).isAfter(now)
     })
-
-    // let offset = 
-    // setTimeout() {
-
-    // }
   }
 
-  setNextEvent()
+  onMount(async () => {
+    setNextEvent()
+
+    setInterval(() => {
+      now = moment()
+      if (now.isAfter(moment(nextEvent.time))) {
+        setNextEvent()
+      }
+    }, 60 * 1000)
+  })
+
+  $: {
+    if (nextEvent) {
+      let then = moment(nextEvent.time)
+      let hours = then.diff(now, 'hours')
+      let minutes = then.diff(now, 'minutes') % 60
+
+      nextEventOffsetString = `${hours}h ${minutes}m`
+    }
+  }
+  $: {
+    if (nextEvent) {
+      nextEventTimeString = moment(nextEvent.time).format('H:mm')
+    }
+  }
 </script>
 
 {#if nextEvent}
+<div class="d-flex w-100 justify-content-center">
+  <div>{ nextEventTimeString }</div>
 
-  {#if nextEvent.type === 'sunrise'}
-  <div class="icomoon-sunrise"></div>
-  {:else}
-  <div class="icomoon-sunset"></div>
-  {/if}
+  <div class="mx-3">
+    {#if nextEvent.type === 'sunrise'}
+    <span class="icomoon-sunrise sunrise"></span>
+    {:else}
+    <span class="icomoon-sunset sunset"></span>
+    {/if}
+  </div>
 
+  <div>{ nextEventOffsetString }</div>
+</div>
 {/if}
+
+<style lang="scss" scoped>
+  .sunrise {
+    color: orangered;
+  }
+  .sunset {
+    color: midnightblue;
+  }
+</style>

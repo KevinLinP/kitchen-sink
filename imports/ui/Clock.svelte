@@ -1,7 +1,6 @@
 <script>
   import moment from 'moment'
   import { onMount } from 'svelte';
-  import ClockSunriseSunset from './ClockSunriseSunset.svelte'
 
   let time = moment()
 
@@ -21,10 +20,6 @@
 </script>
  
  
-<div class="container">
-  <h1 class="display-1">
-    { timeString }
-  </h1>
-
-  <ClockSunriseSunset/>
-</div>
+<h1 class="display-1">
+  { timeString }
+</h1>
