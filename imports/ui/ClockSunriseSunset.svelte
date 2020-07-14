@@ -4,14 +4,14 @@
   import SunCalc from 'suncalc'
   import { onMount } from 'svelte';
 
+  export let now
+
   // TODO: made non-static
   const location = {
     name: 'Washington, DC',
     lat: 38.9047,
     long: -77.0315,
   };
-
-  let now = moment()
   let nextEvent = null
   let nextEventTimeString = null
   let nextEventOffsetString = null
@@ -32,29 +32,21 @@
     })
   }
 
-  onMount(async () => {
-    setNextEvent()
-
-    setInterval(() => {
-      now = moment()
-      if (now.isAfter(moment(nextEvent.time))) {
-        setNextEvent()
-      }
-    }, 60 * 1000)
-  })
+  setNextEvent()
 
   $: {
-    if (nextEvent) {
-      let then = moment(nextEvent.time)
-      let hours = then.diff(now, 'hours')
-      let minutes = then.diff(now, 'minutes') % 60
+    let then = moment(nextEvent.time)
+    let hours = then.diff(now, 'hours')
+    let minutes = then.diff(now, 'minutes') % 60
 
-      nextEventOffsetString = `${hours}h ${minutes}m`
-    }
+    nextEventOffsetString = `${hours}h ${minutes}m`
   }
+
+  $: nextEventTimeString = moment(nextEvent.time).format('H:mm')
+
   $: {
-    if (nextEvent) {
-      nextEventTimeString = moment(nextEvent.time).format('H:mm')
+    if (now.isAfter(moment(nextEvent.time))) {
+      setNextEvent()
     }
   }
 </script>
