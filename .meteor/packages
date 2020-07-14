@@ -24,3 +24,5 @@ accounts-base@1.4.3
 accounts-password@1.5.1
 nimble:restivus
 http@1.4.2
+svelte:compiler
+rdb:svelte-meteor-data
